@@ -382,7 +382,15 @@ def UserSignUp():
         db.session.add(newUser)
         db.session.commit()
         return jsonify({"message": "signup"}), 200
-
+    
+@app.route('/boxSignUp', methods=["POST"])
+def boardSignup():
+    if request.method == 'POST':
+        data = request.get_json()
+        BoardUser = board(boardid = data['username'],boardpassword=data['password'])
+        db.session.add(BoardUser)
+        db.session.commit()
+        return jsonify({"message": "boxsignup"}), 200
 
 @app.route('/GetOtp', methods=['POST'])
 def GetOtp():
